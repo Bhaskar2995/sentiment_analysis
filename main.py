@@ -6,15 +6,17 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3001", "https://sentiment-analysis-fxsu.onrender.com", "https://sentiment-analysis-react-pbnzv62iv-bhaskars-projects-cbd2bc62.vercel.app"],
+    allow_origins=["http://localhost:3001", "https://sentiment-analysis-react-pbnzv62iv-bhaskars-projects-cbd2bc62.vercel.app"],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
 @app.post("/analyze")
-def read_root(payload: dict):
+def read_root(payload:dict):
+    print("payload", payload)
     text = payload.get("text", "")
+    print("text", text)
     co = cohere.Client("1tQuJVluwbSQMMAmCSaClts44fOQfoiuyYhbThA6")
     response = co.chat(
         model="command-r-plus-08-2024",
